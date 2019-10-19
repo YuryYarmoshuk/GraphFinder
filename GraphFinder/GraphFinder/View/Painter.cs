@@ -32,7 +32,26 @@ namespace GraphFinder.View
             _columnCount = searcher.MaxCountX(graph.Nodes);
             _rowCount = searcher.MaxCountY(graph.Nodes);
 
-            NodeRadius = 25;
+            NodeRadius = GetRadius();
+        }
+
+        private int GetRadius()
+        {
+            double width = Math.Round(Canvas.RenderSize.Width / _columnCount);
+            double height = Math.Round(Canvas.RenderSize.Height / _rowCount);
+
+            double radius = 0;
+
+            if (width < height)
+            {
+                radius = width - width * 0.1;
+            }
+            else
+            {
+                radius = height - height * 0.1;
+            }
+
+            return (int)Math.Round(radius);
         }
 
         public void Draw()
@@ -192,9 +211,9 @@ namespace GraphFinder.View
         {
             TextBlock text = new TextBlock();
 
-            text.FontSize = NodeRadius - 7;
+            text.FontSize = NodeRadius - NodeRadius * 0.25;
             text.Text = node.Identifier;
-            text.Margin = new Thickness(FindOffsetX(node) + NodeRadius / 3, FindOffsetY(node), 0, 0);
+            text.Margin = new Thickness(FindOffsetX(node) + NodeRadius / 3.5, FindOffsetY(node), 0, 0);
 
             return text;
         }
@@ -203,11 +222,11 @@ namespace GraphFinder.View
         {
             TextBlock text = new TextBlock();
 
-            text.FontSize = NodeRadius - 7;
+            text.FontSize = NodeRadius - NodeRadius * 0.25;
             text.Text = edge.Weight.ToString();
             text.Margin = new Thickness(
-                Math.Abs(FindOffsetX(edge.Start) + FindOffsetX(edge.End)) / 2,
-                Math.Abs(FindOffsetY(edge.Start) + FindOffsetY(edge.End)) / 2,
+                Math.Abs(FindOffsetX(edge.Start) + FindOffsetX(edge.End)) / 2.25,
+                Math.Abs(FindOffsetY(edge.Start) + FindOffsetY(edge.End)) / 2.25,
                 0, 0);
 
             return text;

@@ -95,12 +95,14 @@ namespace GraphFinder
             graph = graphGenerator.Generate(nodeCount);
 
             nodeGrid.ItemsSource = graph.Nodes;
+
+            Painter painter = new Painter(canvas1, graph);
+            painter.Draw();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Painter painter = new Painter(canvas1, graph);
-            painter.Draw();
+            
         }
     }
 }

@@ -25,12 +25,12 @@
                 <Grid Background="#FFE5E5E5" Margin="0,0,-3,0">
                     <DataGrid Name="nodeGrid" Margin="37,25,36,0" Height="95" VerticalAlignment="Top"/>
                     <DataGrid Margin="37,163,36,0" Height="121" VerticalAlignment="Top"/>
-                    <Label Content="Матрица смежности" HorizontalAlignment="Left" Margin="127,-4,0,0" VerticalAlignment="Top" Height="30" Width="116"/>
-                    <Label Content="Матрица ребер" HorizontalAlignment="Left" Margin="127,133,0,0" VerticalAlignment="Top" Height="30" Width="116"/>
+                    <Label Content="Узлы" HorizontalAlignment="Left" Margin="127,-4,0,0" VerticalAlignment="Top" Height="30" Width="116"/>
+                    <Label Content="Ребра" HorizontalAlignment="Left" Margin="127,133,0,0" VerticalAlignment="Top" Height="30" Width="116"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Сгенерировать" Margin="43,0,0,28" Click="Button_Click" HorizontalAlignment="Left" Width="124" Height="44" VerticalAlignment="Bottom"/>
+        <Button Content="Сгенерировать" Margin="43,0,0,28" Click="Button_Click" HorizontalAlignment="Left" Width="328" Height="44" VerticalAlignment="Bottom"/>
         <Canvas x:Name="canvas1" Margin="398,34,10,28" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
         <DockPanel Height="23" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <StatusBar DockPanel.Dock="Bottom">
@@ -39,6 +39,5 @@
                 </StatusBarItem>
             </StatusBar>
         </DockPanel>
-        <Button Content="Построить" HorizontalAlignment="Left" Margin="184,0,0,28" Width="128" Height="47" VerticalAlignment="Bottom" Click="Button_Click_1"/>
     </Grid>
 </Window>
