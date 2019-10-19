@@ -21,7 +21,7 @@ namespace GraphFinder.Util
 
             for (int i = 0; i < nodes.Count - 1; i++)
             {
-                if (nodes[i].Center.X < nodes[i + 1].Center.X)
+                if (nodes[maxIndex].Center.X < nodes[i + 1].Center.X)
                 {
                     maxIndex = i + 1;
                 }
@@ -36,7 +36,7 @@ namespace GraphFinder.Util
 
             for (int i = 0; i < nodes.Count - 1; i++)
             {
-                if (nodes[i].Center.Y < nodes[i + 1].Center.Y)
+                if (nodes[maxIndex].Center.Y < nodes[i + 1].Center.Y)
                 {
                     maxIndex = i + 1;
                 }

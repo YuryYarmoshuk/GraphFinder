@@ -42,11 +42,46 @@ namespace GraphFinder.View
 
             ClearingCanvas();
 
+            DrawGrid();
+
             DrawNodes(nodes);
 
             DrawEdges(edges);
 
             DrawLabels(nodes, edges);
+        }
+
+        private void DrawGrid()
+        {
+            for(int i = 0; i < _columnCount; i++)
+            {
+                Line line = new Line();
+
+                line.X1 = Canvas.RenderSize.Width / _columnCount * (i + 1);
+                line.Y1 = 0;
+                line.X2 = Canvas.RenderSize.Width / _columnCount * (i + 1);
+                line.Y2 = Canvas.RenderSize.Height;
+                
+                line.Stroke = Brushes.Pink;
+                line.StrokeThickness = 0.5;
+
+                Canvas.Children.Add(line);
+            }
+
+            for (int i = 0; i < _rowCount; i++)
+            {
+                Line line = new Line();
+
+                line.X1 = 0;
+                line.Y1 = Canvas.RenderSize.Height / _rowCount * (i + 1);
+                line.X2 = Canvas.RenderSize.Width;
+                line.Y2 = Canvas.RenderSize.Height / _rowCount * (i + 1);
+
+                line.Stroke = Brushes.Pink;
+                line.StrokeThickness = 0.5;
+
+                Canvas.Children.Add(line);
+            }
         }
 
         private void DrawEdges(List<Edge> edges)

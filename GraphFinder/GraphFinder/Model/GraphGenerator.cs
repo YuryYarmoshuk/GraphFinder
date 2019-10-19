@@ -32,13 +32,29 @@ namespace GraphFinder.Model
 
         private void FillingGraph(Graph graph, List<List<int>> matrix)
         {
+            int count = 1;
+
             for(int i = 0; i< matrix.Count; i++)
             {
                 for(int j = 0; j< matrix[i].Count; j++)
                 {
                     if(matrix[i][j] != 0)
                     {
-                        Node node = new Node(new Point(j + 1, i + 1));
+                        Node node;
+
+                        if (j == 0)
+                        {
+                            node = new Node(new Point(j + 1, i + 1), "s");
+                        }
+                        else if (j == matrix[i].Count - 1)
+                        {
+                            node = new Node(new Point(j + 1, i + 1), "e");
+                        }
+                        else
+                        {
+                            node = new Node(new Point(j + 1, i + 1), count.ToString());
+                            count++;
+                        }
                         graph.AddNode(node);
                     }
                 }

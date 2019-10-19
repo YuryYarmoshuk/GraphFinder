@@ -23,6 +23,8 @@ namespace GraphFinder
     /// </summary>
     public partial class MainWindow : Window
     {
+        Graph graph;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,15 +32,15 @@ namespace GraphFinder
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            /*Graph graph = new Graph();
+            /*graph = new Graph();
 
-            Node node1 = new Node(new Point(1, 3), "s");
-            Node node2 = new Node(new Point(2, 2), "1");
-            Node node3 = new Node(new Point(2, 4), "2");
-            Node node4 = new Node(new Point(3, 4), "3");
-            Node node5 = new Node(new Point(5, 2), "4");
-            Node node6 = new Node(new Point(6, 5), "5");
-            Node node7 = new Node(new Point(7, 3), "e");
+            Node node1 = new Node(new Point(1, 2), "s");
+            Node node2 = new Node(new Point(4, 1), "1");
+            Node node3 = new Node(new Point(2, 2), "2");
+            Node node4 = new Node(new Point(5, 2), "3");
+            Node node5 = new Node(new Point(3, 3), "4");
+            Node node6 = new Node(new Point(4, 4), "5");
+            Node node7 = new Node(new Point(6, 1), "e");
             
             graph.AddNode(node1);
             graph.AddNode(node2);
@@ -90,8 +92,13 @@ namespace GraphFinder
                 erText.Text = "Только целые числа";
             }
 
-            Graph graph = graphGenerator.Generate(nodeCount);
+            graph = graphGenerator.Generate(nodeCount);
 
+            nodeGrid.ItemsSource = graph.Nodes;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
             Painter painter = new Painter(canvas1, graph);
             painter.Draw();
         }
