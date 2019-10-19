@@ -26,8 +26,6 @@ namespace GraphFinder
         public MainWindow()
         {
             InitializeComponent();
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -93,6 +91,9 @@ namespace GraphFinder
             }
 
             Graph graph = graphGenerator.Generate(nodeCount);
+
+            Painter painter = new Painter(canvas1, graph);
+            painter.Draw();
         }
     }
 }

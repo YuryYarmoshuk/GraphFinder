@@ -8,10 +8,6 @@
         Title="Graph finder
         " Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="395*"/>
-            <ColumnDefinition Width="397*"/>
-        </Grid.ColumnDefinitions>
         <TabControl Margin="10,10,0,75" HorizontalAlignment="Left" Width="383">
             <TabItem Header="Setup
                      ">
@@ -35,8 +31,8 @@
             </TabItem>
         </TabControl>
         <Button Content="Сгенерировать" Margin="43,0,0,28" Click="Button_Click" HorizontalAlignment="Left" Width="291" Height="44" VerticalAlignment="Bottom"/>
-        <Canvas x:Name="canvas1" Margin="3,34,10,28" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" Grid.Column="1"/>
-        <DockPanel Grid.ColumnSpan="2" Height="23" VerticalAlignment="Bottom" Margin="0,0,0,0">
+        <Canvas x:Name="canvas1" Margin="398,34,10,28" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}"/>
+        <DockPanel Height="23" VerticalAlignment="Bottom" Margin="0,0,0,0">
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
                     <TextBlock Name="erText" />
