@@ -82,19 +82,30 @@ namespace GraphFinder
 
             GraphGenerator graphGenerator = new GraphGenerator();
             int nodeCount = 5;
+            int percent = 70;
+            int width = 5;
 
             try
             {
                 nodeCount = Int32.Parse(nodeCountTextBox.Text);
+                percent = Int32.Parse(percentTextBox.Text);
+                width = Int32.Parse(widthTextBox.Text);
             }
             catch
             {
                 erText.Text = "Только целые числа";
             }
 
+            graphGenerator.Width = width;
+
             graph = graphGenerator.Generate(nodeCount);
 
+            graph.Percent = percent;
+
+            graph.RefactorGraph();
+
             nodeGrid.ItemsSource = graph.Nodes;
+            edgeGrid.ItemsSource = graph.Edges;
 
             Painter painter = new Painter(canvas1, graph);
             painter.Draw();
@@ -102,7 +113,17 @@ namespace GraphFinder
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            
+            erText.Text = "";
+
+            try
+            {
+                Painter painter = new Painter(canvas1, graph);
+                painter.Draw();
+            }
+            catch
+            {
+                erText.Text = "Сгенерируйте граф";
+            }
         }
     }
 }

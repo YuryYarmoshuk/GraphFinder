@@ -55,7 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entity\Path.cs" />
+    <Compile Include="Entity\PathConstanse.cs" />
     <Compile Include="Model\GraphGenerator.cs" />
+    <Compile Include="Model\PathFinder.cs" />
     <Compile Include="Util\NodeSearcher.cs" />
     <Compile Include="Util\RandomGenerator.cs" />
     <Compile Include="View\Painter.cs" />

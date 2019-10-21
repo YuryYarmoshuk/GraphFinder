@@ -11,6 +11,8 @@ namespace GraphFinder.Model
 {
     class GraphGenerator
     {
+        public int Width { get; set; }
+
         int _currentNode = 0;
         int _maxNodeCount = 0;
 
@@ -21,16 +23,18 @@ namespace GraphFinder.Model
 
             Graph graph = new Graph();
 
-            List<List<int>> matrix = CreateMatrix(_maxNodeCount, _maxNodeCount + 2);
+            List<List<int>> matrix = CreateMatrix(_maxNodeCount, _maxNodeCount + Width + 2);
 
             FillingNodeMatrix(matrix);
 
-            FillingGraph(graph, matrix);
+            FillingGraphByNodes(graph, matrix);
+
+            FillingGraphByEdges(graph);
 
             return graph;
         }
 
-        private void FillingGraph(Graph graph, List<List<int>> matrix)
+        private void FillingGraphByNodes(Graph graph, List<List<int>> matrix)
         {
             int count = 1;
 
@@ -129,6 +133,64 @@ namespace GraphFinder.Model
                     }
                 }
             }
+        }
+
+        private void FillingGraphByEdges(Graph graph)
+        {
+            Node startNode = null;
+            Node endNode = null;
+
+            for (int i = 0; i < graph.Nodes.Count; i++)
+            {
+                startNode = graph.Nodes[i];
+
+                for (int j = 0; j < graph.Nodes.Count; j++)
+                {
+                    if (i != j)
+                    {
+                        endNode = graph.Nodes[j];
+
+                        Edge edge = new Edge(startNode, endNode, GetWeight(startNode, endNode));
+
+                        if (graph.IsNotEgdeExist(edge))
+                        {
+                            graph.AddEdge(edge);
+                        }
+                    }
+                }
+            }
+        }
+
+        private Node GetNodeByCenter(Graph graph, Point center)
+        {
+            Node currentNode = null;
+
+            foreach(Node node in graph.Nodes)
+            {
+                if (node.Center.X == center.X + 1 && node.Center.Y == center.Y + 1)
+                {
+                    currentNode = node;
+                }
+            }
+
+            return currentNode;
+        }
+
+        private int GetWeight(Node start, Node end)
+        {
+            double weight = 0;
+
+            double xCatet = Math.Abs(start.Center.X - end.Center.X);
+            double yCatet = Math.Abs(start.Center.Y - end.Center.Y);
+
+            weight = Math.Round(Math.Sqrt(Math.Pow(xCatet, 2) + Math.Pow(xCatet, 2)));
+
+            if (weight == 0)
+            {
+                weight = 1;
+            }
+
+            return (int)weight;
         }
     }
 }

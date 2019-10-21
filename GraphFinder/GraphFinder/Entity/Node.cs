@@ -24,5 +24,10 @@ namespace GraphFinder.Entity
             Center = point;
             Identifier = identifier;
         }
+
+        public override string ToString()
+        {
+            return String.Format("Node: {0} - ({1},{2})", Identifier, Center.X, Center.Y);
+        }
     }
 }

@@ -225,8 +225,8 @@ namespace GraphFinder.View
             text.FontSize = NodeRadius - NodeRadius * 0.25;
             text.Text = edge.Weight.ToString();
             text.Margin = new Thickness(
-                Math.Abs(FindOffsetX(edge.Start) + FindOffsetX(edge.End)) / 2.25,
-                Math.Abs(FindOffsetY(edge.Start) + FindOffsetY(edge.End)) / 2.25,
+                Math.Abs(FindOffsetX(edge.Start) + FindOffsetX(edge.End)) / 2,
+                Math.Abs(FindOffsetY(edge.Start) + FindOffsetY(edge.End)) / 2,
                 0, 0);
 
             return text;
