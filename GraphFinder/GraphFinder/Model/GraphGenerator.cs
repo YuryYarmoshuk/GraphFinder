@@ -183,11 +183,26 @@ namespace GraphFinder.Model
             double xCatet = Math.Abs(start.Center.X - end.Center.X);
             double yCatet = Math.Abs(start.Center.Y - end.Center.Y);
 
+            double coef = 0;
+
             weight = Math.Round(Math.Sqrt(Math.Pow(xCatet, 2) + Math.Pow(xCatet, 2)));
+
+            if (xCatet > yCatet)
+            {
+                coef = xCatet;
+            }
+            else
+            {
+                coef = yCatet;
+            }
 
             if (weight == 0)
             {
-                weight = 1;
+                weight = coef;
+            }
+            else
+            {
+                weight *= coef;
             }
 
             return (int)weight;

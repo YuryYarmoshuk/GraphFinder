@@ -107,6 +107,11 @@ namespace GraphFinder
             nodeGrid.ItemsSource = graph.Nodes;
             edgeGrid.ItemsSource = graph.Edges;
 
+            PathConstanse pathConstanse = new PathConstanse();
+            PathFinder pathFinder = new PathFinder(pathConstanse, graph);
+
+            pathFinder.Search();
+
             Painter painter = new Painter(canvas1, graph);
             painter.Draw();
         }

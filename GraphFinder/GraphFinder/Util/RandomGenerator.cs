@@ -19,13 +19,11 @@ namespace GraphFinder.Util
         public int RandomNodeCount()
         {
             return random.Next(0, 2);
-            //return new Random((int)DateTime.UtcNow.Ticks).Next(0, 2);
         }
 
         public int RandomRowNumber(int min, int max)
         {
             return random.Next(min, max);
-            //return new Random((int)DateTime.UtcNow.Ticks).Next(min, max);
         }
     }
 }
