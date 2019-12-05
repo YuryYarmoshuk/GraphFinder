@@ -29,7 +29,7 @@ namespace GraphFinder.Model
 
             FillingGraphByNodes(graph, matrix);
 
-            FillingGraphByEdges(graph);
+            FillingGraphByEdges(graph, matrix);
 
             return graph;
         }
@@ -135,10 +135,12 @@ namespace GraphFinder.Model
             }
         }
 
-        private void FillingGraphByEdges(Graph graph)
+        private void FillingGraphByEdges(Graph graph, List<List<int>> matrix)
         {
             Node startNode = null;
             Node endNode = null;
+
+            graph.Nodes = graph.Nodes.OrderBy(n => n.Center.X).ThenBy(n => n.Center.Y).ToList<Node>();
 
             for (int i = 0; i < graph.Nodes.Count; i++)
             {

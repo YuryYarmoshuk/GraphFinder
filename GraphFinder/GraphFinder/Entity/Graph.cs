@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GraphFinder.Entity
 {
     class Graph
     {
-        public List<Node> Nodes { get; private set; }
-        public List<Edge> Edges { get; private set; }
+        public List<Node> Nodes { get; set; }
+        public List<Edge> Edges { get; set; }
         public int Percent { get; set; }
 
 
@@ -81,6 +82,32 @@ namespace GraphFinder.Entity
             {
                 Edges.RemoveAt(i);
             }
+        }
+
+        public Node GetNodeByCenter(Point center)
+        {
+            return Nodes.Find(n => n.Center.Equals(center));
+        }
+
+        public Node GetFirstNode()
+        {
+            return Nodes.Find(n => n.Identifier.Equals("s"));
+        }
+
+        public int GetEdgeWeight(Node start, Node end)
+        {
+            int weight = -1;
+
+            try
+            {
+                weight = Edges.Find(n => n.Start.Equals(start) && n.End.Equals(end)).Weight;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return weight;
         }
     }
 }

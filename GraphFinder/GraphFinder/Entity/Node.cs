@@ -11,18 +11,24 @@ namespace GraphFinder.Entity
     {
         public Point Center { get; private set; }
         public string Identifier { get; private set; }
+        public int Weight { get; set; }
+        public bool IsPlayerOnNode { get; set; }
 
 
         public Node(Point point)
         {
             Center = point;
             Identifier = "";
+            Weight = -1;
+            IsPlayerOnNode = false;
         }
 
         public Node(Point point, string identifier)
         {
             Center = point;
             Identifier = identifier;
+            Weight = -1;
+            IsPlayerOnNode = false;
         }
 
         public override string ToString()

@@ -17,6 +17,7 @@ namespace GraphFinder.View
         public Canvas Canvas { get; set; }
         public int NodeRadius { get; set; }
         public Graph Graph { get; set; }
+        public bool IsEdgeShowed { get; set; }
 
         private NodeSearcher searcher = new NodeSearcher();
 
@@ -33,6 +34,8 @@ namespace GraphFinder.View
             _rowCount = searcher.MaxCountY(graph.Nodes);
 
             NodeRadius = GetRadius();
+
+            IsEdgeShowed = false;
         }
 
         private int GetRadius()
@@ -65,14 +68,17 @@ namespace GraphFinder.View
 
             DrawNodes(nodes);
 
-            DrawEdges(edges);
+            if (IsEdgeShowed)
+            {
+                DrawEdges(edges);
+            }
 
             DrawLabels(nodes, edges);
         }
 
         private void DrawGrid()
         {
-            for(int i = 0; i < _columnCount; i++)
+            for (int i = 0; i < _columnCount; i++)
             {
                 Line line = new Line();
 
@@ -80,7 +86,7 @@ namespace GraphFinder.View
                 line.Y1 = 0;
                 line.X2 = Canvas.RenderSize.Width / _columnCount * (i + 1);
                 line.Y2 = Canvas.RenderSize.Height;
-                
+
                 line.Stroke = Brushes.Pink;
                 line.StrokeThickness = 0.5;
 
@@ -103,6 +109,16 @@ namespace GraphFinder.View
             }
         }
 
+        public double GetCellWidth()
+        {
+            return Canvas.RenderSize.Width / _columnCount * 2 - Canvas.RenderSize.Width / _columnCount * 1;
+        }
+
+        public double GetCellHeight()
+        {
+            return Canvas.RenderSize.Height / _rowCount * 2 - Canvas.RenderSize.Height / _rowCount * 1;
+        }
+
         private void DrawEdges(List<Edge> edges)
         {
             foreach (Edge edge in edges)
@@ -113,9 +129,21 @@ namespace GraphFinder.View
 
         private void DrawNodes(List<Node> nodes)
         {
+            Brush color;
+
             foreach (Node node in nodes)
             {
-                Canvas.Children.Add(CreateEllipse(FindOffsetX(node), FindOffsetY(node)));
+                
+                if (node.IsPlayerOnNode)
+                {
+                    color = Brushes.Red;
+                }
+                else
+                {
+                    color = Brushes.Black;
+                }
+
+                Canvas.Children.Add(CreateEllipse(FindOffsetX(node), FindOffsetY(node), color));
             }
         }
 
@@ -126,9 +154,12 @@ namespace GraphFinder.View
                 Canvas.Children.Add(CreateText(node));
             }
 
-            foreach (Edge edge in edges)
+            if (IsEdgeShowed)
             {
-                Canvas.Children.Add(CreateText(edge));
+                foreach (Edge edge in edges)
+                {
+                    Canvas.Children.Add(CreateText(edge));
+                }
             }
         }
 
@@ -167,14 +198,14 @@ namespace GraphFinder.View
             return direction;
         }
 
-        private Ellipse CreateEllipse(double offsetX, double offsetY)
+        private Ellipse CreateEllipse(double offsetX, double offsetY, Brush color)
         {
             Ellipse ellipse = new Ellipse();
 
             ellipse.Width = NodeRadius;
             ellipse.Height = NodeRadius;
             ellipse.StrokeThickness = 1.5;
-            ellipse.Stroke = Brushes.Black;
+            ellipse.Stroke = color;
 
             ellipse.Margin = new Thickness(offsetX, offsetY, 0, 0);
 

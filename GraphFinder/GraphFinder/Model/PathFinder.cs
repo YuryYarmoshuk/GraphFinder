@@ -26,6 +26,9 @@ namespace GraphFinder.Model
             
             Node startNode = null;
 
+            int min = 0;
+            bool isEnded = false;
+
             foreach(Node node in Graph.Nodes)
             {
                 if(node.Identifier == "s")
@@ -34,18 +37,42 @@ namespace GraphFinder.Model
                 }
             }
 
-            foreach(Edge edge in Graph.Edges)
+            while (!isEnded)
             {
-                if (edge.Start.Equals(startNode))
+                if (startNode == null)
                 {
-                    edges.Add(edge);
+                    startNode = pathEdges[pathEdges.Count - 1].End;
+                }
+
+                foreach (Edge edge in Graph.Edges)
+                {
+                    if (edge.Start.Equals(startNode))
+                    {
+                        edges.Add(edge);
+                    }
+                }
+
+                for (int i = 0; i < edges.Count - 1; i++)
+                {
+                    if (edges[min].Weight > edges[i + 1].Weight)
+                    {
+                        min = i + 1;
+                    }
+                }
+
+                pathEdges.Add(edges[min]);
+                min = 0;
+                startNode = null;
+                edges.Clear();
+
+                if (pathEdges[pathEdges.Count - 1].End.Identifier == "e")
+                {
+                    isEnded = true; ;
                 }
             }
-
-            pathEdges.Add(edges[0]);
-
+            
             Path path = new Path();
-
+          
             foreach(Edge edge in pathEdges)
             {
                 path.AddEdge(edge);
@@ -53,6 +80,52 @@ namespace GraphFinder.Model
 
             PathConstanse.AddPath(path);
             PathConstanse.SetShortestPath();
+        }
+
+        public void DeyxtraSearch()
+        {
+            List<Edge> edges = new List<Edge>();
+            List<Edge> pathEdges = new List<Edge>();
+
+            Node startNode = null;
+
+            int min = 0;
+            bool isEnded = false;
+
+            foreach (Node node in Graph.Nodes)
+            {
+                if (node.Identifier == "s")
+                {
+                    startNode = node;
+                    node.Weight = 0;
+                }
+            }
+
+            while (!isEnded)
+            {
+                if (startNode == null)
+                {
+                    startNode = pathEdges[pathEdges.Count - 1].End;
+                }
+
+                foreach (Edge edge in Graph.Edges)
+                {
+                    if (edge.Start.Equals(startNode))
+                    {
+                        edges.Add(edge);
+                    }
+                }
+
+                foreach (Edge edge in edges)
+                {
+                    if (edge.End.Weight == -1)
+                    { 
+                        edge.End.Weight = edge.Start.Weight + edge.Weight;
+                    }
+                }
+
+                
+            }
         }
     }
 }
